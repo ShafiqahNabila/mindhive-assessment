@@ -1,47 +1,128 @@
 ## Part 6: Documentation and Instructions
 
-### 1. **Setup Instructions**
-   - Provide step-by-step instructions for setting up the project locally, including installing dependencies, setting up the database, and running the backend and frontend servers.
-   - Include a section on configuring environment variables (e.g., database credentials, API keys).
-
-### 2. **Key Technical Decisions**
-   - **Web Scraping**: Explain why you chose `BeautifulSoup` and `requests` over other libraries like Scrapy or Selenium.
-   - **Database**: Justify the choice of PostgreSQL and the schema design (e.g., tables for outlets, addresses, and operating hours).
-   - **Geocoding**: Discuss why Google Maps API was chosen over alternatives like OpenStreetMap or Mapbox.
-   - **Backend**: Explain why FastAPI was selected over Flask or Django, highlighting its asynchronous capabilities and automatic OpenAPI documentation.
-   - **Frontend**: Justify the use of React and `react-leaflet` for map visualization, emphasizing their flexibility and ease of integration.
-   - **Chatbot**: Describe the decision to use regex and simple NLP techniques for query handling, and mention potential future improvements with more advanced models.
-
-### 3. **Architecture Overview**
-   - Provide a high-level diagram of the system architecture, showing how the frontend, backend, database, and external APIs interact.
-   - Explain the flow of data from scraping to storage, geocoding, and visualization.
-
-### 4. **API Documentation**
-   - Include detailed documentation for all API endpoints, including request/response examples and error handling.
-   - Use tools like Swagger or Redoc to generate interactive API documentation.
-
-### 5. **Frontend Documentation**
-   - Document the frontend components, including how the map visualization works and how the search functionality is implemented.
-   - Provide instructions for customizing the frontend (e.g., changing the map style or adding new features).
-
-### 6. **Chatbot Documentation**
-   - Explain how the chatbot functionality works, including how queries are parsed and matched to the data.
-   - Provide examples of supported queries and how to extend the functionality.
-
-### 7. **Testing and Debugging**
-   - Document how to run tests for the backend and frontend.
-   - Provide tips for debugging common issues (e.g., database connection errors, API rate limits).
-
-### 8. **Deployment Instructions**
-   - Provide instructions for deploying the application to a cloud platform (e.g., AWS, Heroku, Vercel).
-   - Include details on setting up a production database, securing API keys, and configuring environment variables.
-
-### 9. **Future Enhancements**
-   - Suggest potential improvements, such as adding caching, implementing user authentication, or enhancing the chatbot with more advanced NLP models.
-
-### 10. **FAQs**
-   - Include a section with frequently asked questions and troubleshooting tips.
+### **1. Introduction**
+This document provides comprehensive instructions for setting up, understanding, and utilizing the solution for the Subway outlets assessment project. It includes technical decisions, framework choices, and guidance for maintaining the project effectively.
 
 ---
 
-This documentation should be comprehensive enough to help anyone understand, set up, and extend your project. Let me know if you need further assistance!
+### **2. Project Overview**
+This project leverages FastAPI as the backend framework and SQLite for database storage. It integrates web scraping, geocoding, and data visualization to present Subway outlets on an interactive map with a 5KM radius feature. The solution is designed to ensure efficiency, scalability, and maintainability.
+
+---
+
+### **3. Setup Instructions**
+
+#### **Step 1: Prerequisites**
+Ensure the following tools are installed:
+- **Python 3.8 - 3.11** 
+- **SQLite** for database management
+- **Google Maps API Key** for geocoding services
+
+---
+
+#### **Step 2: Backend Setup**
+1. **Create and Activate a Virtual Environment**
+   ```bash
+   python -m venv clean_env
+   clean_env\Scripts\activate  # Windows
+   source clean_env/bin/activate # Mac/Linux
+   ```
+
+2. **Install Essential Dependencies**
+   ```bash
+   pip install fastapi uvicorn sqlite geopy requests googlemaps sqlalchemy dotenv
+   ```
+
+3. **Database Configuration**
+   - Create a SQLite database named `outlets.db` in the project folder.
+   - In `database.py`, locate the `DATABASE_URL` variable and ensure it points to:
+     ```python
+     DATABASE_URL = "sqlite:///outlets.db"
+     ```
+
+4. **Run the FastAPI Server**
+   ```bash
+   uvicorn api:app --reload
+   ```
+
+---
+
+#### **Step 3: Frontend Setup**
+1. **Navigate to the Frontend Directory**
+   ```bash
+   cd frontend
+   ```
+
+
+---
+
+#### **Step 4: Environment Variables**
+Create a `.env` file in the root folder with the following entries:
+```env
+DATABASE_URL=sqlite:///outlets.db
+GOOGLE_MAPS_API_KEY=API_KEY_HERE
+```
+
+---
+
+### **4. Technical Decisions**
+
+#### **Framework Choice: FastAPI**
+- **Reasoning:** FastAPI offers modern async capabilities, making it ideal for handling multiple requests efficiently. It also provides automatic OpenAPI documentation.
+
+#### **Database Choice: SQLite**
+- **Reasoning:** Lightweight and effective for small-to-medium-scale data storage, ideal for this assessment project.
+
+#### **Geocoding Service: Google Maps API**
+- **Reasoning:** Google Maps API offers accurate and efficient geocoding for address-to-coordinate conversion.
+
+---
+
+### **5. Usage Instructions**
+
+#### **Web Scraping Script**
+To collect Subway outlet data:
+```bash
+python scripts/scrape_subway.py
+```
+
+#### **Geocoding Script**
+To convert outlet addresses into coordinates:
+```bash
+python scripts/geocode_addresses.py
+```
+
+#### **API Endpoints**
+- **GET /outlets** — Retrieve all Subway outlets.
+- **GET /outlets/{id}** — Retrieve details of a specific outlet.
+- **GET /outlets/search?query=** — Search outlets by location (e.g., "Bangsar").
+
+#### **Frontend Access**
+- Open the web app in your browser at `http://localhost:3000`.
+
+---
+
+### **6. Troubleshooting Tips**
+- **Dependency Issues:** Run `pip install -r requirements.txt` if essential dependencies are missing.
+- **API Key Errors:** Ensure your `.env` file is correctly configured.
+- **Database Errors:** Confirm `outlets.db` exists and the `DATABASE_URL` is correctly assigned.
+
+---
+
+### **7. Best Practices**
+- Regularly update your dependencies to avoid compatibility issues.
+- Follow PEP 8 standards to maintain clean and consistent code.
+- Document new features or changes to simplify future updates.
+
+---
+
+### **8. Future Enhancements**
+- Introduce pagination for large data retrieval.
+- Add user authentication for enhanced security.
+- Integrate automated tests to improve code reliability.
+
+---
+
+### **9. Contact and Support**
+For further guidance or technical support, please reach out to the development team or refer to the project's GitHub repository.
+
