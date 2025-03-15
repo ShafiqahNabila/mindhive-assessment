@@ -18,7 +18,7 @@ This project is a full-stack solution for scraping Subway outlet data from the S
 ### Installation and Setup
 
 #### Prerequisites
-- Python 3.8 - 3.11 (For this assessment, python version 3.12 has been used)
+- Python 3.8 - 3.11 (For this assessment, python v3.12 has been used)
 - SQLite (For database storage)
 - Google Maps API key (For geocoding)
 - HTML, CSS, and JavaScript (For frontend development)
@@ -33,7 +33,7 @@ This project is a full-stack solution for scraping Subway outlet data from the S
      ```bash
      clean_env\Scripts\activate
      ```
-     - Mac/Linux: Run this command to activate the virtual environment:
+   - Mac/Linux: Run this command to activate the virtual environment:
      ```bash
      source clean_env/bin/activate
      ```
@@ -95,26 +95,28 @@ git push -u origin main
 
 ## Usage
 
-### Main 
-Containing main function from scraping, storing, and geocoding, can use to complete the function in one go:
+### Main Script
+The `main.py` script integrates all core functionalities, including web scraping, database storage, and geocoding. Running this script will execute the entire process in one go:
 ```bash
 python main.py
 ```
+### Individual Scripts
+For more control, you can run each step separately as follows:
 
-#### Web Scraping
-Run the scraping script only to collect data from the Subway website:
+#### 1. Web Scraping
+To collect Subway outlet data directly from the website:
 ```bash
 python scraper.py
 ```
 
-#### Database Storing
-Store the scraped data in the database:
+#### 2. Database Storage
+To store the scraped data in the SQLite database for easy access and management:
 ```bash
 python database.py
 ```
 
-#### Geocoding
-Run the geocoding script to convert addresses into coordinates:
+#### 3. Geocoding
+To convert outlet addresses into geographic coordinates using the Google Maps API:
 ```bash
 python geocoder.py
 ```
@@ -130,52 +132,6 @@ python geocoder.py
 - Open the web application in your browser at `http://127.0.0.1:8000`.
 - View Subway outlets on the map with 5KM radius catchments.
 - Use the search box to query the data.
-
----
-
-### Project Structure
-```
-subway-finder/
-├── main/ 
-├── database/ 
-├── geocoder/ 
-├── models
-├── api/ 
-├── scraper/ 
-├── outlets/                                  
-├── frontend/                 
-│   ├── index/               
-│   ├── script/                  
-│   └── style/                      
-├── .venv                     # Environment variables (virtual environment)
-├── DOCUMENTATION.md          # Project documentation        
-└── README.md                 # Project explanation
-
-```
-
----
-
-### Key Technical Decisions
-1. **Web Scraping**: Used `BeautifulSoup` and `requests` for scraping due to their simplicity and effectiveness.
-2. **Database**: Chose PostgreSQL for its robustness and scalability.
-3. **Geocoding**: Used Google Maps API for accurate geocoding.
-4. **Backend**: FastAPI was chosen for its speed, modern features, and automatic OpenAPI documentation.
-5. **Frontend**: React with `react-leaflet` for map visualization due to its flexibility and ease of use.
-6. **Chatbot**: Implemented a simple search functionality using regex and NLP techniques for query handling.
-
----
-
-### Troubleshooting
-- **Database Connection Issues**: Ensure the database is running and the connection string in `config.py` is correct.
-- **Geocoding Failures**: Verify that the Google Maps API key is valid and has sufficient quota.
-- **Frontend Not Loading**: Ensure the backend server is running and the frontend is correctly configured to communicate with it.
-
----
-
-### Future Improvements
-- Add caching for geocoding requests to reduce API calls.
-- Implement user authentication for the API.
-- Enhance the chatbot with more advanced NLP models (e.g., GPT-based models).
 
 ---
 
