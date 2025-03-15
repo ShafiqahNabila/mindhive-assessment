@@ -80,25 +80,43 @@ GOOGLE_MAPS_API_KEY=API_KEY_HERE
 
 ### **5. Usage Instructions**
 
-#### **Web Scraping Script**
-To collect Subway outlet data:
+#### Main Script
+The `main.py` script integrates all core functionalities, including web scraping, database storage, and geocoding. Running this script will execute the entire process in one go:
 ```bash
-python scripts/scrape_subway.py
+python main.py
+```
+#### Individual Scripts
+For more control, you can run each step separately as follows:
+
+##### 1. Web Scraping
+To collect Subway outlet data directly from the website:
+```bash
+python scraper.py
 ```
 
-#### **Geocoding Script**
-To convert outlet addresses into coordinates:
+##### 2. Database Storage
+To store the scraped data in the SQLite database for easy access and management:
 ```bash
-python scripts/geocode_addresses.py
+python database.py
 ```
 
-#### **API Endpoints**
-- **GET /outlets** — Retrieve all Subway outlets.
-- **GET /outlets/{id}** — Retrieve details of a specific outlet.
-- **GET /outlets/search?query=** — Search outlets by location (e.g., "Bangsar").
+##### 3. Geocoding
+To convert outlet addresses into geographic coordinates using the Google Maps API:
+```bash
+python geocoder.py
+```
 
-#### **Frontend Access**
-- Open the web app in your browser at `http://localhost:3000`.
+#### API Endpoints
+- **GET /**: Root endpoint for the API.
+- **GET /outlets**: Fetches all outlets from the database.
+- **GET /outlets/{outlet_id}**: Fetches a specific outlet by its ID.
+- **GET /outlets/search/**: Searches for outlets by name.
+- **GET /outlets/nearby/**: Fetches outlets within a specified radius of the user's location.
+
+#### Frontend
+- Open the web application in your browser at `http://127.0.0.1:8000`.
+- View Subway outlets on the map with 5KM radius catchments.
+- Use the search box to query the data.
 
 ---
 
@@ -124,5 +142,5 @@ python scripts/geocode_addresses.py
 ---
 
 ### **9. Contact and Support**
-For further guidance or technical support, please reach out to the development team or refer to the project's GitHub repository.
+For further guidance or technical support, please reach out to me or refer to the project's GitHub repository.
 
