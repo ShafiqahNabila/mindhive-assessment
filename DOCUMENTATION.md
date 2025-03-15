@@ -68,13 +68,17 @@ GOOGLE_MAPS_API_KEY=API_KEY_HERE
 ### **4. Technical Decisions**
 
 #### **Framework Choice: FastAPI**
-- **Reasoning:** FastAPI offers modern async capabilities, making it ideal for handling multiple requests efficiently. It also provides automatic OpenAPI documentation.
+- **Reasoning:** FastAPI was selected as the backend framework due to its modern, asynchronous capabilities, which make it ideal for handling multiple concurrent requests. Since this project involves web scraping, data storage, and API requests, FastAPI’s non-blocking I/O operations significantly improve efficiency. FastAPI’s automatic OpenAPI documentation simplifies testing, debugging, and potential future integrations. Compared to traditional frameworks like Flask or Django, FastAPI’s lightweight design and impressive performance make it the best choice for this project’s requirements.
 
 #### **Database Choice: SQLite**
-- **Reasoning:** Lightweight and effective for small-to-medium-scale data storage, ideal for this assessment project.
+- **Reasoning:** SQLite was chosen as the database solution for its simplicity, portability, and minimal configuration requirements. Since the project involves managing a moderate-sized dataset containing Subway outlet details, SQLite’s lightweight structure was sufficient. Its serverless architecture eliminates the need for complex setup, ensuring faster deployment. While PostgreSQL offers advanced features like enhanced indexing, scalability, and concurrent write support, SQLite was preferred because the project’s dataset size and functionality requirements did not justify the overhead of PostgreSQL. If the project expands significantly in the future, migrating to PostgreSQL may become a viable option.
 
 #### **Geocoding Service: Google Maps API**
-- **Reasoning:** Google Maps API offers accurate and efficient geocoding for address-to-coordinate conversion.
+- **Reasoning:** The Google Maps API was selected for geocoding due to its exceptional accuracy, extensive global coverage, and seamless integration features. Since precise address-to-coordinate conversion was crucial for mapping Subway outlet locations, Google Maps API provided reliable results. While OpenStreetMap’s Nominatim service offers a free alternative, Google Maps API was preferred for its superior accuracy in urban areas, where Subway outlets are typically located. Additionally, Google Maps API’s structured pricing model ensures consistent performance without unexpected rate limits, making it a stable and scalable choice for this project’s needs.
+
+#### **Web Scraping Tools: Selenium & WebDriver**
+- **Reasoning:** Initially, web scraping was attempted using requests and BeautifulSoup. However, since the Subway website loads content dynamically using JavaScript, these tools struggled to extract the complete dataset. Consequently, Selenium with WebDriver was chosen for its ability to handle interactive and JavaScript-driven content. Selenium's automation features allowed for effective navigation through the website’s dynamic structure, ensuring all necessary data was collected accurately. Its versatility in interacting with web elements, combined with robust support for multiple browsers, made Selenium the optimal choice for this project’s scraping requirements.
+
 
 ---
 
